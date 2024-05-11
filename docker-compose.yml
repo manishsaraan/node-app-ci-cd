@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   backend:
-    image: node-app:${TAG}
+    image: manishsaraan/node-app:${TAG}
     container_name: node-backend
 
     # depends_on:
