@@ -1,0 +1,52 @@
+name: Deploy to server
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+
+      - name: Login to dockerhub
+        uses: docker/login-action@v1
+        with:
+          username: ${{secrets.DOCKER_USERNAME}}
+          password: ${{secrets.DOCKER_PASSWORD}}
+
+      - name: Build and push to dockerhub
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: manishsaraan/node-app:latest
+
+      - name: Verify push
+        run: docker pull manishsaraan/node-app:latest
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{secrets.SSH_HOST}}
+          username: ${{secrets.SSH_USERNAME}}
+          key: ${{secrets.SSH_KEY}}
+          script: |
+            sudo docker manishsaraan/node-app:latest
+            sudo docker stop node-app || true
+            sudo docker rm node-app || true
+            sudo docker run -d --name node-app -p 3000:3000 manishsaraan/node-app:latest
+
+            # buildid for tag
+            # sonarquebe
+            # container limit on resource use
+            # docker command main env file
+            # run docker compose in detach mode
+            # setup failover in docker compose
+            # promethius
+            # reverse proxy, nginx 
+            # pass variable in docker compose
