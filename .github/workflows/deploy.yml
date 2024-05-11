@@ -35,8 +35,7 @@ jobs:
           script: |
             cd /var/www/html/
             sudo docker pull manishsaraan/node-app:${{ github.run_id }}
-            export TAG=${{ github.run_id }}
-            sudo docker-compose up
+            sudo TAG=${{ github.run_id }} docker-compose up
           #sudo docker stop node-app || true
           #sudo docker rm node-app || true
           #sudo docker run -d --name node-app -p 3000:3000 manishsaraan/node-app:${{ github.run_id }}
