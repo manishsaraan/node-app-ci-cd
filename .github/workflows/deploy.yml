@@ -33,8 +33,6 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           key: ${{secrets.SSH_KEY}}
           script: |
-            scp -o StrictHostKeyChecking=no docker-compose.yml ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}:/var/www/html/
-            ssh ${{secrets.SSH_USERNAME}}@${{secrets.SSH_HOST}}
             cd /var/www/html/
             sudo docker pull manishsaraan/node-app:${{ github.run_id }}
             export TAG=${{ github.run_id }}
