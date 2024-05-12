@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           source: "./docker-compose.yml"
-          target: "/var/www/html/docker-compose.yml"
+          target: "/var/www/html/"
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
