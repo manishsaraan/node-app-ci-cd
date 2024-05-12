@@ -42,8 +42,6 @@ jobs:
           username: ${{secrets.SSH_USERNAME}}
           key: ${{secrets.SSH_KEY}}
           script: |
-            cd /var/www/html/
-
             set -e  # Ensure that the script exits on first error
             cd /var/www/html/
             sudo docker pull manishsaraan/node-app:${{ github.run_id }}
@@ -53,6 +51,8 @@ jobs:
             export STRIPE_KEY=${{ secrets.STRIPE_KEY }}
             export STRIPE_SECRET=${{ secrets.STRIPE_SECRET }}
 
+            pwd
+            ls -la
             sudo -E docker-compose down
             sudo -E docker-compose up -d
           #sudo docker stop node-app || true
