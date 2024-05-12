@@ -6,9 +6,18 @@ services:
     ports:
       - "3000:3000"
     restart: always
+    volumes:
+      - logs_data:/app/logs
     environment:
       DATABASE_URL: ${DATABASE_URL}
       STRIPE_KEY: ${STRIPE_KEY}
       STRIPE_SECRET: ${STRIPE_SECRET}
       STRIPE_SECRET1: ${STRIPE_SECRET}
-# test
+
+volumes:
+  logs_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /var/www/html/node-app
+      o: bind
