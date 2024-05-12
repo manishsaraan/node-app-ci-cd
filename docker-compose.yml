@@ -3,18 +3,10 @@ services:
   backend:
     image: manishsaraan/node-app:${TAG}
     container_name: node-backend
-
-    # depends_on:
-    #   - mongodb # this service should be up before running the backend service
     ports:
-      - 3000:3000
-  #  environment:
-  #  DB: "mongodb://mongodbcontainer:27017"
-
-volumes:
-  mongod_data:
-    driver: local
-    driver_opts:
-      type: none
-      device: /etc/usr
-      o: bind
+      - "3000:3000"
+    restart: always
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      STRIPE_KEY: ${STRIPE_KEY}
+      STRIPE_SECRET: ${STRIPE_SECRET}
