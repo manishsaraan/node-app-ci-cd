@@ -9,7 +9,7 @@ const client = new PrismaClient();
 app.get("/", (req, res) => {
   console.log("********get quest***d***********");
   res.json({
-    message: process.env.STRIPE_SECRET,
+    message: process.env.STRIPE_SECRET + "---------test",
   });
 });
 
