@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           source: "./docker-compose.yml"
-          target: "/var/www/html/"
+          target: "/var/www/html/node-app"
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
@@ -43,7 +43,7 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           script: |
             set -e  # Ensure that the script exits on first error
-            cd /var/www/html/
+            cd /var/www/html/node-app
             sudo docker pull manishsaraan/node-app:${{ github.run_id }}
 
             export TAG=${{ github.run_id }}
