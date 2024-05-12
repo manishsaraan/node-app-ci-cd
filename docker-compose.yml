@@ -10,3 +10,4 @@ services:
       DATABASE_URL: ${DATABASE_URL}
       STRIPE_KEY: ${STRIPE_KEY}
       STRIPE_SECRET: ${STRIPE_SECRET}
+# test
