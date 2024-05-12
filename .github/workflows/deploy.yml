@@ -41,7 +41,7 @@ jobs:
             export TAG=${{ github.run_id }}
             sudo -E docker-compose down
 
-            sudo -E docker-compose --verbose up
+            sudo -E docker-compose up -d
           #sudo docker stop node-app || true
           #sudo docker rm node-app || true
           #sudo docker run -d --name node-app -p 3000:3000 manishsaraan/node-app:${{ github.run_id }}
