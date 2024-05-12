@@ -34,7 +34,7 @@ jobs:
           key: ${{secrets.SSH_KEY}}
           script: |
             cd /var/www/html/
-            scp docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/docker-compose.yml
+            rsync -avz -e "ssh -o StrictHostKeyChecking=no" ./docker-compose.yml ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/var/www/html/docker-compose.yml
             set -e  # Ensure that the script exits on first error
             cd /var/www/html/
             sudo docker pull manishsaraan/node-app:${{ github.run_id }}
